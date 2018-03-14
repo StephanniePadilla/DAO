@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import java.lang.reflect.Field;
+=======
+package src;
+>>>>>>> Stashed changes
 
 public class Sesion {
 
@@ -31,6 +35,13 @@ public class Sesion {
 
     public void update(){}
 
-    public void delete(){}
+    public void delete(Object objeto, String nombre){
+        //DROP parametro FROM  clase WHERE id = parametro pasado
+        StringBuffer delete = new StringBuffer();
+         delete.append("DELETE FROM");
+         delete.append(objeto.getClass().getName());
+         delete.append("WHERE id=");
+         delete.append(nombre);
+    }
 
 }
