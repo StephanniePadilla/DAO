@@ -40,7 +40,10 @@ public class Sesion {
         StringBuffer delete = new StringBuffer();
          delete.append("DELETE FROM");
          delete.append(objeto.getClass().getName());
-         delete.append("WHERE id=");
+         String s = objeto.getClass().getFields()[0].getName();
+         delete.append("WHERE");
+         delete.append (s);
+         delete.append("=");
          delete.append(nombre);
     }
 
