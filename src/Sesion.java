@@ -30,7 +30,6 @@ public class Sesion {
     }
 
     private static void getValue(Object obj, String key) {
-
         Method m = obj.getClass().getDeclaredMethod("getName", null);
         Object o = m.invoke(obj, null);
         if (o instanceof String ) {
@@ -39,15 +38,21 @@ public class Sesion {
         }
     }
 
-    public void read(Class cls, String nombre){ //Te lo lee segun el nombre
+    public void read(Object obj,int id){ //Te lo lee segun el nombre
         StringBuffer sb = new StringBuffer(); //creo el buffer y empiezo a poner las instancias
         sb.append("SELECT * FROM ");
-        sb.append(cls.getName());
+        sb.append(obj.getClass().getName());
         sb.append(" WHERE id=");
-        sb.append(nombre);
+        sb.append(id);
     }
 
-    public void update(){}
+    public void update(Object obj,int id){
+        StringBuffer sb = new StringBuffer();
+        sb.append("UPDATE ");
+        sb.append(obj.getClass().getName());
+        sb.append(" WHERE id=");
+        sb.append(id);
+    }
 
     public void delete(Object objeto, String nombre){
         //DROP parametro FROM  clase WHERE id = parametro pasado
