@@ -1,13 +1,23 @@
 public class Jugador {
 
+    private int idjugador;
     private String nombre;
     private int edad;
     private int dorsal;
 
-    public Jugador(String nombre, int edad, int dorsal){
+    public Jugador(int idjugador, String nombre, int edad, int dorsal){
+        this.idjugador(idjugador);
         this.setNombre(nombre);
         this.setEdad(edad);
         this.setDorsal(dorsal);
+    }
+
+    public int getIdjugador() {
+        return idjugador;
+    }
+
+    public void setIdjugador(int idjugador) {
+        this.idjugador = idjugador;
     }
 
     public String getNombre() {
