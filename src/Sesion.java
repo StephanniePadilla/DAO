@@ -1,9 +1,6 @@
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-
-
-
 public class Sesion {
 
     public static void insert(Object obj){ //función create
@@ -29,7 +26,7 @@ public class Sesion {
 
     }
 
-    private static void getValue(Object obj, String key) {
+    private static void getValue throws NoSuchMethodException (Object obj, String key) {
 
         Method m = obj.getClass().getDeclaredMethod("getName", null);
         Object o = m.invoke(obj, null);
