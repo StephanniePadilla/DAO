@@ -1,8 +1,7 @@
-<<<<<<< Updated upstream
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-package src;
+
 
 
 public class Sesion {
