@@ -17,7 +17,7 @@ public class Sesion {
         sb.append(") VALUES (");
         for(Field field : obj.getClass().getFields()){
             sb.append("? ");
-            getValue(obj.getClass(), field.getName());
+            //getValue(obj.getClass(), field.getName());
             sb.append(", ");
         }
 
