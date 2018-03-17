@@ -36,7 +36,7 @@ public class Sesion {
         return null;
     }
 
-    public String read(Object obj,int id){ //Te lo lee segun el nombre
+    public static String read(Object obj,int id){ //Te lo lee segun el nombre
         StringBuffer sb = new StringBuffer(); //creo el buffer y empiezo a poner las instancias
         sb.append("SELECT * FROM ");
         sb.append(obj.getClass().getName());
@@ -46,7 +46,7 @@ public class Sesion {
         return sb.toString();
     }
 
-    public String update(Object obj,int id)throws NoSuchMethodException, IllegalAccessException,InvocationTargetException{
+    public static String update(Object obj,int id)throws NoSuchMethodException, IllegalAccessException,InvocationTargetException{
         StringBuffer sb = new StringBuffer();
         sb.append("UPDATE ");
         sb.append(obj.getClass().getName());
@@ -66,7 +66,7 @@ public class Sesion {
         return sb.toString();
     }
 
-    public String delete(Object objeto, int id){
+    public static String delete(Object objeto, int id){
         //DROP parametro FROM  clase WHERE id = parametro pasado
         StringBuffer delete = new StringBuffer();
          delete.append("DELETE FROM ");
