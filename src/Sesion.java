@@ -25,7 +25,7 @@ public class Sesion {
         return sb.toString();
     }
 
-    private static String getValue  (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+    private static String getValue (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 
         Method m = obj.getClass().getDeclaredMethod("getName", null);
         Object o = m.invoke(obj, null);
@@ -46,25 +46,35 @@ public class Sesion {
         return sb.toString();
     }
 
-    public String update(Object obj,int id){
+    public String update(Object obj,int id)throws NoSuchMethodException, IllegalAccessException,InvocationTargetException{
         StringBuffer sb = new StringBuffer();
         sb.append("UPDATE ");
         sb.append(obj.getClass().getName());
-        sb.append(" WHERE id=");
+        sb.append(" SET ");
+        for(Field field : obj.getClass().getFields()){
+            sb.append(field.getName());
+            sb.append(" = ");
+            //Primera letra del atributo en mayúsculas
+            String fieldName = field.getName().substring(0,1).toUpperCase();
+            fieldName += field.getName().substring(1);  //Añadir el resto del nombre del atributo
+            //Obtener el valor del atributo
+            sb.append(obj.getClass().getDeclaredMethod("get"+fieldName,null).invoke(obj,null));
+        }
+        sb.append(" WHERE id= ");
         sb.append(id);
+        sb.append(";");
         return sb.toString();
     }
 
-    public String delete(Object objeto, String nombre){
+    public String delete(Object objeto, int id){
         //DROP parametro FROM  clase WHERE id = parametro pasado
         StringBuffer delete = new StringBuffer();
-         delete.append("DELETE FROM");
+         delete.append("DELETE FROM ");
          delete.append(objeto.getClass().getName());
          String s = objeto.getClass().getFields()[0].getName();
-         delete.append("WHERE");
-         delete.append (s);
-         delete.append("=");
-         delete.append(nombre);
+         delete.append(" WHERE id = ");
+         delete.append (id);
+         delete.append(";");
          return delete.toString();
     }
 
