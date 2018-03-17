@@ -9,18 +9,18 @@ public class Sesion {
         sb.append("INSERT INTO ");
         sb.append(obj.getClass().getName());
         sb.append(" (");
-        for(Field field : obj.getClass().getFields()){
+        for(Field field : obj.getClass().getDeclaredFields()){
             sb.append(field.getName());
             sb.append(", ");
         }
-        sb.setLength(sb.length() - 1);  //Borrar la ulima coma
+        sb.setLength(sb.length() - 2);  //Borrar la ulima coma
         sb.append(") VALUES (");
-        for(Field field : obj.getClass().getFields()){
+        for(Field field : obj.getClass().getDeclaredFields()){
             sb.append("? ");
             //getValue(obj.getClass(), field.getName());
             sb.append(", ");
         }
-        sb.setLength(sb.length() - 1);  //Borrar la ulima coma
+        sb.setLength(sb.length() - 3);  //Borrar la ulima coma
         sb.append(");");
         return sb.toString();
     }
@@ -40,8 +40,9 @@ public class Sesion {
         StringBuffer sb = new StringBuffer(); //creo el buffer y empiezo a poner las instancias
         sb.append("SELECT * FROM ");
         sb.append(obj.getClass().getName());
-        sb.append(" WHERE id=");
-        sb.append(id);
+        sb.append(" WHERE id = ");
+        //sb.append(id);
+        sb.append("?");
         sb.append(";");
         return sb.toString();
     }
@@ -51,17 +52,21 @@ public class Sesion {
         sb.append("UPDATE ");
         sb.append(obj.getClass().getName());
         sb.append(" SET ");
-        for(Field field : obj.getClass().getFields()){
+        for(Field field : obj.getClass().getDeclaredFields()){
             sb.append(field.getName());
             sb.append(" = ");
             //Primera letra del atributo en mayúsculas
             String fieldName = field.getName().substring(0,1).toUpperCase();
             fieldName += field.getName().substring(1);  //Añadir el resto del nombre del atributo
             //Obtener el valor del atributo
-            sb.append(obj.getClass().getDeclaredMethod("get"+fieldName,null).invoke(obj,null));
+            //sb.append(obj.getClass().getDeclaredMethod("get"+fieldName,null).invoke(obj,null));
+            sb.append("?");
+            sb.append(", ");
         }
-        sb.append(" WHERE id= ");
-        sb.append(id);
+        sb.setLength(sb.length()-2);    //Borrar la ultima coma
+        sb.append(" WHERE id = ");
+        //sb.append(id);
+        sb.append("?");
         sb.append(";");
         return sb.toString();
     }
@@ -71,9 +76,9 @@ public class Sesion {
         StringBuffer delete = new StringBuffer();
          delete.append("DELETE FROM ");
          delete.append(objeto.getClass().getName());
-         String s = objeto.getClass().getFields()[0].getName();
          delete.append(" WHERE id = ");
-         delete.append (id);
+         //delete.append (id);
+        delete.append("?");
          delete.append(";");
          return delete.toString();
     }
