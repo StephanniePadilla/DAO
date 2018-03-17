@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 public class Sesion {
 
-    public static void insert(Object obj){ //función create
+    public static String insert(Object obj){ //función create
         StringBuffer sb = new StringBuffer();
         sb.append("INSERT INTO ");
         sb.append(obj.getClass().getName());
@@ -20,11 +20,9 @@ public class Sesion {
             //getValue(obj.getClass(), field.getName());
             sb.append(", ");
         }
-
         sb.setLength(sb.length() - 1);  //Borrar la ulima coma
         sb.append(");");
-
-
+        return sb.toString();
     }
 
     private static String getValue  (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
@@ -38,23 +36,26 @@ public class Sesion {
         return null;
     }
 
-    public void read(Object obj,int id){ //Te lo lee segun el nombre
+    public String read(Object obj,int id){ //Te lo lee segun el nombre
         StringBuffer sb = new StringBuffer(); //creo el buffer y empiezo a poner las instancias
         sb.append("SELECT * FROM ");
         sb.append(obj.getClass().getName());
         sb.append(" WHERE id=");
         sb.append(id);
+        sb.append(";");
+        return sb.toString();
     }
 
-    public void update(Object obj,int id){
+    public String update(Object obj,int id){
         StringBuffer sb = new StringBuffer();
         sb.append("UPDATE ");
         sb.append(obj.getClass().getName());
         sb.append(" WHERE id=");
         sb.append(id);
+        return sb.toString();
     }
 
-    public void delete(Object objeto, String nombre){
+    public String delete(Object objeto, String nombre){
         //DROP parametro FROM  clase WHERE id = parametro pasado
         StringBuffer delete = new StringBuffer();
          delete.append("DELETE FROM");
@@ -64,6 +65,7 @@ public class Sesion {
          delete.append (s);
          delete.append("=");
          delete.append(nombre);
+         return delete.toString();
     }
 
 }

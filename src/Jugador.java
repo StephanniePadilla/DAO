@@ -6,7 +6,7 @@ public class Jugador {
     private int dorsal;
 
     public Jugador(int idjugador, String nombre, int edad, int dorsal){
-        this.idjugador(idjugador);
+        this.setIdjugador(idjugador);
         this.setNombre(nombre);
         this.setEdad(edad);
         this.setDorsal(dorsal);
