@@ -2,6 +2,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+
+
+
 public class Sesion {
 
     public static String insert(Object obj){ //función create
@@ -25,7 +28,7 @@ public class Sesion {
         return sb.toString();
     }
 
-    private static String getValue (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+    private static String getValue (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
         Method m = obj.getClass().getDeclaredMethod("getName", null);
         Object o = m.invoke(obj, null);
